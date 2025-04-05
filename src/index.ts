@@ -18,18 +18,8 @@ export class MyMCP extends McpAgent {
 
 const mcpHandler = MyMCP.mount('/');
 
-// Export a request handler that checks the transport header
 export default {
 	async fetch(request: Request, env: any, ctx: any) {
-		return mcpHandler.fetch(request, env, ctx);
-	  const isSse = request.headers.get('accept')?.includes("text/event-stream");
-	  const isMessage = request.url.includes("message");
-
-	  if (isMessage || isSse) {
-		return mcpHandler.fetch(request, env, ctx);
-	  } else {
-		console.log("Default request");
-		return app.fetch(request, env, ctx);
-	  }
+	  return mcpHandler.fetch(request, env, ctx);
 	}
   };
